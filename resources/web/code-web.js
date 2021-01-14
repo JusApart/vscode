@@ -30,10 +30,10 @@ const WEB_MAIN = path.join(APP_ROOT, 'src', 'vs', 'code', 'browser', 'workbench'
 
 // This is useful to simulate real world CORS
 const ALLOWED_CORS_ORIGINS = [
-	'http://localhost:8081',
-	'http://127.0.0.1:8081',
-	'http://localhost:8080',
-	'http://127.0.0.1:8080',
+	'http://192.168.1.57:8081',
+	'http://192.168.1.57:8081',
+	'http://192.168.1.57:8080',
+	'http://192.168.1.57:8080',
 ];
 
 const WEB_PLAYGROUND_VERSION = '0.0.10';
@@ -83,7 +83,7 @@ const PORT = args.port || process.env.PORT || 8080;
 const LOCAL_PORT = args.local_port || process.env.LOCAL_PORT || PORT;
 const SECONDARY_PORT = args['secondary-port'] || (parseInt(PORT, 10) + 1);
 const SCHEME = args.scheme || process.env.VSCODE_SCHEME || 'http';
-const HOST = args.host || 'localhost';
+const HOST = '192.168.1.57';
 const AUTHORITY = process.env.VSCODE_AUTHORITY || `${HOST}:${PORT}`;
 
 const exists = (path) => util.promisify(fs.exists)(path);
