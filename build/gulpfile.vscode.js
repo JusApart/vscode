@@ -553,7 +553,7 @@ function getSettingsSearchBuildId(packageJson) {
 			/\/master$/.test(branch) ? 1 :
 				2; // Some unexpected branch
 
-		const out = cp.execSync(`git rev-list HEAD --count`);
+		const out = cp.execSync(`git rev-list HEAD --count`, { shell: false });
 		const count = parseInt(out.toString());
 
 		// <version number><commit count><branchId (avoid unlikely conflicts)>

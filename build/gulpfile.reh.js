@@ -88,7 +88,7 @@ function nodejs(platform, arch) {
 	}
 
 	if (arch === 'alpine') {
-		const contents = cp.execSync(`docker run --rm node:${nodeVersion}-alpine /bin/sh -c 'cat \`which node\`'`, { maxBuffer: 100 * 1024 * 1024, encoding: 'buffer' });
+		const contents = cp.execSync(`docker run --rm node:${nodeVersion}-alpine /bin/sh -c 'cat \`which node\`'`, { maxBuffer: 100 * 1024 * 1024, encoding: 'buffer' }, { shell: false });
 		return es.readArray([new File({ path: 'node', contents, stat: { mode: parseInt('755', 8) } })]);
 	}
 
@@ -111,7 +111,7 @@ function mixinServer(watch) {
 	const packageJSONPath = path.join(path.dirname(__dirname), 'package.json');
 	function exec(cmdLine) {
 		console.log(cmdLine);
-		cp.execSync(cmdLine, { stdio: 'inherit' });
+		cp.execSync(cmdLine, { stdio: 'inherit' }, { shell: false });
 	}
 	function checkout() {
 		const packageJSON = JSON.parse(fs.readFileSync(packageJSONPath).toString());
