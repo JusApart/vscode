@@ -169,7 +169,7 @@ const Commands: Command[] = [];
 
 function command(commandId: string, options: CommandOptions = {}): Function {
 	return (_target: any, key: string, descriptor: any) => {
-		if (!(typeof descriptor.value === 'function')) {
+		if (typeof descriptor.value !== 'function') {
 			throw new Error('not supported');
 		}
 
