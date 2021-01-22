@@ -609,31 +609,37 @@ const editorProject: string = 'vscode-editor',
 	extensionsProject: string = 'vscode-extensions',
 	setupProject: string = 'vscode-setup';
 
+export function getProject(name: string, project: string) {
+	return { name: name, project: project }
+}
+
 export function getResource(sourceFile: string): Resource {
 	let resource: string;
 
 	if (/^vs\/platform/.test(sourceFile)) {
-		return { name: 'vs/platform', project: editorProject };
+		getProject('vs/platform', editorProject)
 	} else if (/^vs\/editor\/contrib/.test(sourceFile)) {
-		return { name: 'vs/editor/contrib', project: editorProject };
+		getProject('vs/editor/contrib', editorProject)
 	} else if (/^vs\/editor/.test(sourceFile)) {
-		return { name: 'vs/editor', project: editorProject };
+		getProject('vs/editor', editorProject)
 	} else if (/^vs\/base/.test(sourceFile)) {
-		return { name: 'vs/base', project: editorProject };
+		getProject('vs/base', editorProject)
 	} else if (/^vs\/code/.test(sourceFile)) {
-		return { name: 'vs/code', project: workbenchProject };
+		getProject('vs/code', workbenchProject)
 	} else if (/^vs\/workbench\/contrib/.test(sourceFile)) {
 		resource = sourceFile.split('/', 4).join('/');
-		return { name: resource, project: workbenchProject };
+		getProject(resource, workbenchProject)
 	} else if (/^vs\/workbench\/services/.test(sourceFile)) {
 		resource = sourceFile.split('/', 4).join('/');
-		return { name: resource, project: workbenchProject };
+		getProject(resource, workbenchProject)
 	} else if (/^vs\/workbench/.test(sourceFile)) {
-		return { name: 'vs/workbench', project: workbenchProject };
+		getProject('vs/workbench', workbenchProject)
 	}
 
 	throw new Error(`Could not identify the XLF bundle for ${sourceFile}`);
 }
+
+
 
 
 export function createXlfFilesForCoreBundle(): ThroughStream {
